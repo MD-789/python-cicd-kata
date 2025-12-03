@@ -1,5 +1,5 @@
 name: Code Quality
-run-name: ${{ github.actor }} is checking code quality 🕵️‍♂️
+run-name: ${{ github.actor }} is checking code quality2 🕵️‍♂️
 on:
   pull-request:
     branches:
