@@ -2,8 +2,6 @@ name: Create Docker Image
 run-name: ${{ github.actor }} is pushing to registry 🐳
 on:
   workflow_call:
-    branches:
-      - 'main'
 jobs:
   quality:
     uses: ./.github/workflows/code-quality.yaml

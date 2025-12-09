@@ -2,8 +2,6 @@ name: Code Quality
 run-name: ${{ github.actor }} is checking code quality 🕵️‍♂️
 on:
   workflow_call:
-    branches:
-      - 'main'
 jobs:
   unit-tests:
     runs-on: ubuntu-latest
