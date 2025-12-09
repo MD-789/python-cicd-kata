@@ -10,7 +10,10 @@ on:
       - 'main'
 
 jobs:
+  push:
+    uses: ./.github/workflows/push-to-registry.yaml
   deploy-to-render:
+    needs: [push]
     runs-on: ubuntu-latest
     env:
       DEPLOY_WEBHOOK_URL: ${{ secrets.DEPLOY_WEBHOOK_URL }}
