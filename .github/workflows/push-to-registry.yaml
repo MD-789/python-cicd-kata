@@ -10,7 +10,7 @@ jobs:
     env:
       USERNAME: ${{ vars.DOCKERHUB_USERNAME }}
       DOCKERLOGIN: ${{ secrets.DOCKERHUB_TOKEN }}
-      SERVICENAME: ${{ SERVICE_NAME }}
+      SERVICENAME: ${{  vars.SERVICE_NAME }}
     steps:
       - uses: actions/checkout@v5
 
