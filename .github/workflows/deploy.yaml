@@ -1,9 +1,14 @@
 name: Deploying to Render
 run-name: ${{ github.actor }} is deploying to Render ☁
+
 on:
-  [pull_request,push]:
+  pull_request:
     branches:
       - 'main'
+  push:
+    branches:
+      - 'main'
+
 jobs:
   deploy-to-render:
     runs-on: ubuntu-latest
@@ -11,7 +16,8 @@ jobs:
       DEPLOY_WEBHOOK_URL: ${{ secrets.DEPLOY_WEBHOOK_URL }}
       USERNAME: ${{ vars.DOCKERHUB_USERNAME }}
       SERVICENAME: ${{ vars.SERVICE_NAME }}
+
     steps:
       - name: Deploy with Hook
-        run: curl "${DEPLOY_WEBHOOK_URL}&imgURL=docker.io%2F${USERNAMEL}%2F${SERVICENAME}%3Alatest"
+        run: curl "${DEPLOY_WEBHOOK_URL}&imgURL=docker.io%2F${USERNAME}%2F${SERVICENAME}%3Alatest"
         shell: bash
