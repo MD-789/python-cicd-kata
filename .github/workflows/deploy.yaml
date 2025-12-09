@@ -1,7 +1,7 @@
-name: Code Quality
+name: Deploy
 run-name: ${{ github.actor }} is deploying to Render ☁
 on:
-  ["pull_request","push"]:
+  push:
     branches:
       - 'main'
 jobs:
