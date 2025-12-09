@@ -5,22 +5,13 @@ on:
     branches:
       - 'main'
 jobs:
-  unit-tests:
+  deploy-to-render:
     runs-on: ubuntu-latest
+    env:
+      DEPLOY_WEBHOOK_URL: ${{ secrets.DEPLOY_WEBHOOK_URL }}
+      USERNAME: ${{ vars.DOCKERHUB_USERNAME }}
+      SERVICENAME: ${{ SERVICE_NAME }}
     steps:
-      - uses: actions/checkout@v5
-
-      - name: "Set up Python"
-        uses: actions/setup-python@v6
-        with:
-          python-version-file: ".python-version"
-
-      - name: Install uv
-        uses: astral-sh/setup-uv@v7
-
-      - name: Install the project
-        run: uv sync --locked --all-extras --dev
-
-      - name: Testing
-        run: echo hola
+      - name: Deploy with Hook
+        run: curl "${DEPLOY_WEBHOOK_URL}&imgURL=docker.io%2F${USERNAMEL}%2F${SERVICENAME}%3Alatest"
         shell: bash

@@ -10,6 +10,7 @@ jobs:
     env:
       USERNAME: ${{ vars.DOCKERHUB_USERNAME }}
       DOCKERLOGIN: ${{ secrets.DOCKERHUB_TOKEN }}
+      SERVICENAME: ${{ SERVICE_NAME }}
     steps:
       - uses: actions/checkout@v5
 
@@ -25,12 +26,12 @@ jobs:
         run: uv sync --all-extras --dev
 
       - name: Build Docker Image
-        run: docker build -t $USERNAME/dice-plus-1:latest .
+        run: docker build -t $USERNAME/$SERVICENAME:latest .
       - name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
           username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Push the image to Docker Hub
-        run: docker push $USERNAME/dice-plus-1:latest
+        run: docker push $USERNAME/$SERVICENAME:latest
 
