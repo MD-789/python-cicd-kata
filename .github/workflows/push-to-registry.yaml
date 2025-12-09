@@ -1,0 +1,41 @@
+name: push-to-registry
+run-name: ${{ github.actor }} is pushing to registry 🐳
+on:
+  pull_request:
+    branches:
+      - 'main'
+jobs:
+  unit-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - shell: bash
+        env:
+            USERNAME: ${{ vars.DOCKERHUB_USERNAME }}
+            DOCKERLOGIN: ${{ secrets.DOCKERHUB_TOKEN }}
+      - uses: actions/checkout@v5
+
+      - name: "Set up Python"
+        uses: actions/setup-python@v6
+        with:
+          python-version-file: ".python-version"
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
+
+      - name: Install the project
+        run: uv sync --locked --all-extras --dev
+
+      - name: Build Docker Image
+        run: docker build -t $USERNAME/dice-plus-1:latest .
+      - name: Run Docker Container
+        run: docker ps
+        run: docker run -p 10000:10000 $USERNAME/dice-plus-1
+        run: docker ps
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ vars.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Push the image to Docker Hub
+        run: docker push $USERNAME/dice-plus-1:latest
+
