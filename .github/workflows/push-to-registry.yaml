@@ -1,7 +1,7 @@
 name: Create Docker Image
 run-name: ${{ github.actor }} is pushing to registry 🐳
 on:
-  [workflow_call]:
+  workflow_call:
     branches:
       - 'main'
 jobs:
