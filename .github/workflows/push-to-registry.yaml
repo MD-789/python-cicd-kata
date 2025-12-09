@@ -1,11 +1,11 @@
-name: push-to-registry
+name: Create Docker Image
 run-name: ${{ github.actor }} is pushing to registry 🐳
 on:
   pull_request:
     branches:
       - 'main'
 jobs:
-  unit-tests:
+  push-to-registry:
     runs-on: ubuntu-latest
     steps:
       - shell: bash
@@ -23,7 +23,7 @@ jobs:
         uses: astral-sh/setup-uv@v7
 
       - name: Install the project
-        run: uv sync --locked --all-extras --dev
+        run: uv sync --all-extras --dev
 
       - name: Build Docker Image
         run: docker build -t $USERNAME/dice-plus-1:latest .
