@@ -1,7 +1,7 @@
-name: Deploy
+name: Deploying to Render
 run-name: ${{ github.actor }} is deploying to Render ☁
 on:
-  push:
+  [pull_request,push]:
     branches:
       - 'main'
 jobs:
