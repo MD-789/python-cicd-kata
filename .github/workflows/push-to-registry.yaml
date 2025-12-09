@@ -10,7 +10,6 @@ jobs:
     runs-on: ubuntu-latest
     env:
       USERNAME: ${{ vars.DOCKERHUB_USERNAME }}
-      DOCKERLOGIN: ${{ secrets.DOCKERHUB_TOKEN }}
       SERVICENAME: ${{  vars.SERVICE_NAME }}
     steps:
       - uses: actions/checkout@v5
