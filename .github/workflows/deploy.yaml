@@ -9,7 +9,7 @@ jobs:
   push:
     uses: ./.github/workflows/push-to-registry.yaml
     secrets:
-      DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+     DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
   deploy-to-render:
     needs: [push]
     runs-on: ubuntu-latest

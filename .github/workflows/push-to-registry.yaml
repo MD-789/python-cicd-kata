@@ -2,6 +2,9 @@ name: Create Docker Image
 run-name: ${{ github.actor }} is pushing to registry 🐳
 on:
   workflow_call:
+    secrets:
+      DOCKERHUB_TOKEN:
+        required: true
 jobs:
   quality:
     uses: ./.github/workflows/code-quality.yaml
